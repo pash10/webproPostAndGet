@@ -1,14 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
-    registerUser();
+    
+    submitButton.addEventListener('click', registerUser)
   });
   
 // Init an empty array
 var arr = [];
 
+
 // Store an empty array in 'arr' in localStorage
 localStorage.setItem('arr', JSON.stringify(arr));
 
-var userId = 1;
+var userId = 3;
 localStorage.setItem('userIdName', userId);
 
 function registerUser() {
