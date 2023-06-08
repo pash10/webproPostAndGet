@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    body.index {
+        background-image: url('/img/gandalf-sax.gif');  
+        background-repeat: no-repeat;  
+        background-position: center center;
+        background-attachment: fixed;
+    }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body class="index">
+    <script>
+    $(document).ready(function() {
+        function adjustBackground() {
+            var aspectRatio =  2* ($(window).width() / $(window).height());
+            if (aspectRatio > 1) {
+                // Landscape
+                $("body.index").css("background-size", "cover");
+            } else {
+                // Portrait
+                $("body.index").css("background-size", "contain");
+            }
+        }
+        adjustBackground();
+        $(window).resize(adjustBackground);
+    });
+    </script>
+</body>
+</html>
