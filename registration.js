@@ -1,31 +1,30 @@
-document.addEventListener('DOMContentLoaded', function() {
-    
+document.addEventListener('DOMContentLoaded', function () {
+    var submitButton = document.getElementById('submitButton')
     submitButton.addEventListener('click', registerUser)
-  });
-  
-// Init an empty array
-var arr = [];
 
 
-// Store an empty array in 'arr' in localStorage
-localStorage.setItem('arr', JSON.stringify(arr));
 
-var userId = 3;
-localStorage.setItem('userIdName', userId);
+    if (!localStorage.getItem('arr')) {
+        var arr = [];
+        localStorage.setItem('arr', JSON.stringify(arr));
+    }
+    if (!localStorage.getItem('userIdName')) {
+        var userId = 0;
+        localStorage.setItem('userIdName', userId);
+    }
+
+
+
+
+});
+
+
 
 function registerUser() {
     var email = document.getElementById('inputValue').value;
     var password = document.getElementById('pass').value;
     var errorMessage = document.getElementById('errorMessage');
     var validEmailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    // Init an empty array
-var arr = [];
-
-// Store an empty array in 'arr' in localStorage
-localStorage.setItem('arr', JSON.stringify(arr));
-
-var userId = 1;
-localStorage.setItem('userIdName', userId);
 
     switch (checkGood(email, password, validEmailRegex)) {
         case 0:
