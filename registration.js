@@ -1,9 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     var submitButton = document.getElementById('submitButton')
     submitButton.addEventListener('click', registerUser)
-
-
-
     if (!localStorage.getItem('arr')) {
         var arr = [];
         localStorage.setItem('arr', JSON.stringify(arr));
@@ -12,10 +9,9 @@ document.addEventListener('DOMContentLoaded', function () {
         var userId = 0;
         localStorage.setItem('userIdName', userId);
     }
+    
 
-
-
-
+    
 });
 
 
@@ -28,31 +24,45 @@ function registerUser() {
 
     switch (checkGood(email, password, validEmailRegex)) {
         case 0:
-            addUser(email, password);
-            var userId = localStorage.getItem('userIdName');
-            window.location.href = "post.html?userId=" + (parseInt(userId) - 1);
+            window.location.href = "index.html";
             break;
         case 1:
-            errorMessage.textContent = "Password field is empty";
+            errorMessage.textContent = "bitch im taken"
             break;
         case 2:
-            errorMessage.textContent = "Email is not valid";
+            errorMessage.textContent = "Password field is empty";
             break;
         case 3:
+            errorMessage.textContent = "Email is not valid";
+            break;
+        case 4:
             errorMessage.textContent = "Email field is empty";
             break;
     }
 }
 
-function checkGood(email, password, validEmailRegex) {
-    if (!email) {
-        return 3; // Email field is empty
-    } else if (!validEmailRegex.test(email)) {
-        return 2; // Email is not valid
+function checkGood(mail, password, validEmailRegex) {
+    var users = getUsersFromLocalStorage(); // Retrieve users
+    var userExists = users.some(user => user.mail === mail); // Check if email already exists
+
+    if (!mail) {
+        return 4; // Email field is empty
+    } else if (!validEmailRegex.test(mail)) {
+        return 3; // Email is not valid
     } else if (!password) {
-        return 1; // Password field is empty
+        return 2; // Password field is empty
+    } else if (userExists) { 
+        return 1; // Email already exists in localStorage
     }
     return 0;
+}
+
+function getUsersFromLocalStorage() {
+    let users = localStorage.getItem('arr');
+    if (users) {
+        return JSON.parse(users);
+    }
+    return [];
 }
 
 function addUser(mail, password) {

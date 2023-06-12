@@ -1,7 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
   fetchPosts();
-});
+  const logoutButton = document.getElementById('logoutButton');
+  const postLink = document.getElementById('postLink');
 
+  // Check login status and set display of navbar items accordingly
+
+  logoutButton.addEventListener('click', function(event) {
+      event.preventDefault();
+      localStorage.removeItem('isLoggedIn');
+      window.location.href = 'index.html';
+  });
+});
+localStorage.setItem('username','test')
 function fetchPosts() {
   const urlParams = new URLSearchParams(window.location.search);
   const userId = urlParams.get('userId');
@@ -39,7 +49,7 @@ function createEmptyCard() {
   title.textContent = 'loser';
 
   const additionalText = document.createElement('p');
-  additionalText.textContent = 'It\'s kinda empty here.';
+  additionalText.textContent = 'go see map';
 
   const button = document.createElement('button');
   button.textContent = 'Click me';
@@ -69,13 +79,23 @@ function createUniqueCard(name) {
   button.onclick = function() {
     window.location.href = 'index.html';
   };
+  
+  const logoutButton = document.createElement('button');
+  logoutButton.textContent = 'Logout';
+  logoutButton.onclick = function() {
+    localStorage.removeItem('userIdName');
+    localStorage.removeItem('arr');
+    window.location.href = 'login.html';
+  };
 
   card.appendChild(title);
   card.appendChild(additionalText);
   card.appendChild(button);
+  card.appendChild(logoutButton); // Append logout button to the card
 
   return card;
 }
+
 
 function createPostCard(post) {
   const card = document.createElement('div');
