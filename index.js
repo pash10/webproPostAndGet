@@ -5,19 +5,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const registerLink = document.getElementById('registerLink');
     const loginLink = document.getElementById('loginLink');
     const postLink = document.getElementById('postLink');
+    const mapLink = document.getElementById('mapLink')
     var submitButton = document.getElementById('postLink');
     submitButton.addEventListener('click', redirectToPost);
 
     // Check login status and set display of navbar items accordingly
     if(localStorage.getItem('isLoggedIn') =='true') {
         console.log('word')
-        logoutButton.style.display = 'blcok';
-        postLink.style.display = 'blcok';
+        logoutButton.style.display = 'block';
+        postLink.style.display = 'block';
+        mapLink.style.display = 'blcok'
         registerLink.style.display = 'none';
         loginLink.style.display = 'none';
     } else {
         logoutButton.style.display = 'none';
         postLink.style.display = 'none';
+        mapLink.style.display = 'none'
         registerLink.style.display = 'block';
         loginLink.style.display = 'block';
     }
