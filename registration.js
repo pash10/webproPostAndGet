@@ -24,6 +24,7 @@ function registerUser() {
 
     switch (checkGood(email, password, validEmailRegex)) {
         case 0:
+            addUser(email,password)
             window.location.href = "index.html";
             break;
         case 1:

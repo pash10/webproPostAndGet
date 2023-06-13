@@ -10,13 +10,13 @@ function redirectToPost() {
     var errorMessage = document.getElementById('errorMessage');
     var validRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-    console.log(checkGood(inputValue, pass, validRegex))
         switch (checkGood(inputValue, pass, validRegex)) {
             case 0:
                  localStorage.setItem('isLoggedIn','true')
                  window.location.href = "index.html";
                  break;
             case 1:
+                console.log(1)
                 errorMessage.textContent = 'you are a ghost or stupid'
                 break;
             case 2:
@@ -36,25 +36,27 @@ function redirectToPost() {
 
 
 
-    function checkGood(mail, password, validEmailRegex) {
+    function checkGood(email, pass, validEmailRegex) {
         var users = getUsersFromLocalStorage(); // Retrieve users
-        var userExists = users.some(user => user.mail === mail); // Check if email already exists
-        var userWithCorrectPassword = users.find(user => user.mail === mail && user.password === password);
-        var userID = userWithCorrectPassword.userID;
-        if (!mail) {
+        var userWithCorrectPassword = users.find(user => user.mail === email && user.password === pass);
+    
+        if (!email) {
             return 5; // Email field is empty
-        } else if (!validEmailRegex.test(mail)) {
+        } else if (!validEmailRegex.test(email)) {
             return 4; // Email is not valid
-        } else if (!password) {
+        } else if (!pass) {
             return 3; // Password field is empty
-        } else if (!userExists) { 
+        }else if (!users.some(user => user.mail === email)) {
             return 2; // Email does not exist in localStorage
-        } else if (!userWithCorrectPassword) { // if mail and password does not match
-            return 1;
-        }
-        localStorage.setItem('idOfCUser',userID)
+        } else if (!userWithCorrectPassword) {
+           return 1; // Email and password do not match
+        } 
+    
+        var userID = userWithCorrectPassword.userID;
+        localStorage.setItem('currentUser', userID);
         return 0;
     }
+    
     
 
 function getUsersFromLocalStorage() {

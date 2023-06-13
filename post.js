@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 localStorage.setItem('username','test')
 function fetchPosts() {
   const urlParams = new URLSearchParams(window.location.search);
-  const userId = urlParams.get('userId');
+  const userId = urlParams.get('userIdName');
   var name = localStorage.getItem('username');
 
   if (userId && /^\d+$/.test(userId)) {
