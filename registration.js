@@ -68,11 +68,11 @@ function getUsersFromLocalStorage() {
 
 function addUser(mail, password) {
     var userId = localStorage.getItem('userIdName');
-    // Create a new user object
-    var newUser = { 'mail': mail, 'password': password, 'userID': userId };
+    // Create a new user object with an empty markers array
+    var newUser = { 'mail': mail, 'password': password, 'userID': userId , 'markers':[]};
 
     // Retrieve 'arr' from localStorage and parse it
-    arr = JSON.parse(localStorage.getItem('arr'));
+    var arr = JSON.parse(localStorage.getItem('arr'));
 
     // Push the new user into the array
     arr.push(newUser);
@@ -83,3 +83,4 @@ function addUser(mail, password) {
     // Store the updated array back into localStorage
     localStorage.setItem('arr', JSON.stringify(arr));
 }
+
