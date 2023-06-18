@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function initMap() {
   // Map options
   var mapOptions = {
-    center: { lat: 0, lng: 0 }, // Center of the map
+    center: {  lat: 32.0853, lng: 34.7818 }, // Center of the map
     zoom: 10 // Zoom level
   };
   // Creating new map
