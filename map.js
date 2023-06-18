@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function initMap() {
   // Map options
   var mapOptions = {
-    center: {  lat: 32.0853, lng: 34.7818 }, // Center of the map
+    center: { lat: 32.0853, lng: 34.7818 }, // Center of the map
     zoom: 10 // Zoom level
   };
   // Creating new map
@@ -76,110 +76,106 @@ function initMap() {
     // Hiding the modal
     document.getElementById('markerModal').style.display = 'none';
   });
-// Function to add a marker to the map
-function addMarker(map, markerData) {
-  // Create a new marker
-  var marker = new google.maps.Marker({
-    position: markerData.position, // Set the marker position
-    map: map, // Associate the marker with our map
-    title: markerData.name // Set the marker title
-  });
+  // Function to add a marker to the map
+  function addMarker(map, markerData) {
+    // Create a new marker
+    var marker = new google.maps.Marker({
+      position: markerData.position, // Set the marker position
+      map: map, // Associate the marker with our map
+      title: markerData.name // Set the marker title
+    });
 
-  // Build the content for InfoWindow
-  var content = '<h3>' + markerData.name + '</h3>';
-  content += '<p>' + markerData.description + '</p>';
-  content += '<img src="' + markerData.image + '" alt="Marker Image" width="100">';
+    // Build the content for InfoWindow
+    var content = '<h3>' + markerData.name + '</h3>';
+    content += '<p>' + markerData.description + '</p>';
+    content += '<img src="' + markerData.image + '" alt="Marker Image" width="100">';
 
-  // Create a new InfoWindow
-  var infoWindow = new google.maps.InfoWindow({
-    content: content // Set the content
-  });
+    // Create a new InfoWindow
+    var infoWindow = new google.maps.InfoWindow({
+      content: content // Set the content
+    });
 
-  // Add a mouseover listener to the marker to open the InfoWindow
-  marker.addListener('mouseover', function () {
-    infoWindow.open(map, marker);
-  });
+    // Add a mouseover listener to the marker to open the InfoWindow
+    marker.addListener('mouseover', function () {
+      infoWindow.open(map, marker);
+    });
 
-  // Add a mouseout listener to the marker to close the InfoWindow
-  marker.addListener('mouseout', function () {
-    infoWindow.close();
-  });
+    // Add a mouseout listener to the marker to close the InfoWindow
+    marker.addListener('mouseout', function () {
+      infoWindow.close();
+    });
 
-  // Add a right-click listener to remove the marker
-  marker.addListener('rightclick', function () {
-    marker.setMap(null); // Remove the marker from the map
-    deleteMarker(markerData); // Delete the marker from the user's data
-  });
+    // Add a right-click listener to remove the marker
+    marker.addListener('rightclick', function () {
+      marker.setMap(null); // Remove the marker from the map
+      deleteMarker(markerData); // Delete the marker from the user's data
+    });
 
-  return marker;
-}
-
-// Function to save a marker
-function saveMarker(markerData) {
-  // Get the current user's ID
-  var currentUserID = localStorage.getItem('currentUser');
-  // Fetch the array of users
-  var users = JSON.parse(localStorage.getItem('arr'));
-  // Find the current user
-  var currentUser = users.find(user => user.userID === currentUserID);
-
-  // Check if the markers array exists, if not, initialize it
-  if (!currentUser.markers) {
-    currentUser.markers = [];
+    return marker;
   }
 
-  // Add the new marker to the array
-  currentUser.markers.push(markerData);
+  // Function to save a marker
+  function saveMarker(markerData) {
+    // Get the current user's ID
+    var currentUserID = localStorage.getItem('currentUser');
+    // Fetch the array of users
+    var users = JSON.parse(localStorage.getItem('arr'));
+    // Find the current user
+    var currentUser = users.find(user => user.userID === currentUserID);
 
-  // Update the user in the users array
-  var userIndex = users.findIndex(user => user.userID === currentUserID);
-  users[userIndex] = currentUser;
+    // Check if the markers array exists, if not, initialize it
+    if (!currentUser.markers) {
+      currentUser.markers = [];
+    }
 
-  // Save the updated users array back to localStorage
-  localStorage.setItem('arr', JSON.stringify(users));
-}
+    // Add the new marker to the array
+    currentUser.markers.push(markerData);
 
-// Function to delete a marker
-function deleteMarker(markerData) {
-  // Get the current user's ID
-  var currentUserID = localStorage.getItem('currentUser');
-  // Fetch the array of users
-  var users = JSON.parse(localStorage.getItem('arr'));
-  // Find the current user
-  var currentUser = users.find(user => user.userID === currentUserID);
+    // Update the user in the users array
+    var userIndex = users.findIndex(user => user.userID === currentUserID);
+    users[userIndex] = currentUser;
 
-  // Filter out the marker to be deleted
-  currentUser.markers = currentUser.markers.filter(function (marker) {
-    return marker.name !== markerData.name;
-  });
+    // Save the updated users array back to localStorage
+    localStorage.setItem('arr', JSON.stringify(users));
+  }
 
-  // Update the user in the users array
-  var userIndex = users.findIndex(user => user.userID === currentUserID);
-  users[userIndex] = currentUser;
+  // Function to delete a marker
+  function deleteMarker(markerData) {
+    // Get the current user's ID
+    var currentUserID = localStorage.getItem('currentUser');
+    // Fetch the array of users
+    var users = JSON.parse(localStorage.getItem('arr'));
+    // Find the current user
+    var currentUser = users.find(user => user.userID === currentUserID);
 
-  // Save the updated users array back to localStorage
-  localStorage.setItem('arr', JSON.stringify(users));
-}
+    // Filter out the marker to be deleted
+    currentUser.markers = currentUser.markers.filter(function (marker) {
+      return marker.name !== markerData.name;
+    });
 
-// Get the modal element
-var modal = document.getElementById("markerModal");
+    // Update the user in the users array
+    var userIndex = users.findIndex(user => user.userID === currentUserID);
+    users[userIndex] = currentUser;
 
-// Get the close button in the modal
-var span = document.getElementsByClassName("close")[0];
+    // Save the updated users array back to localStorage
+    localStorage.setItem('arr', JSON.stringify(users));
+  }
 
-// Add click event handler for close button to hide the modal
-span.onclick = function () {
-  modal.style.display = "none";
-}
+  // Get the modal element
+  var modal = document.getElementById("markerModal");
 
-// Add click event handler for anywhere outside the modal to hide it
-window.onclick = function (event) {
-  if (event.target == modal) {
+  // Get the close button in the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // Add click event handler for close button to hide the modal
+  span.onclick = function () {
     modal.style.display = "none";
   }
-}
 
- 
+  // Add click event handler for anywhere outside the modal to hide it
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
 }
-
-// Other methods and event handlers...
