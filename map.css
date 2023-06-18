@@ -1,3 +1,7 @@
+/* The CSS selector .index targets the HTML body with class .index. 
+The body is styled with a light grey background color, Arial font, 
+and displayed as a flex container in a column direction aligned center. 
+Zero margin and padding values remove any default spacing. */
 body.index {
     background-color: #f3f3f3;
     font-family: Arial, sans-serif;
@@ -8,6 +12,9 @@ body.index {
     align-items: center;
 }
 
+/* The #navbar targets the HTML element with id navbar. The navigation bar 
+is styled with a dark grey background color, is set to a 100% width of the 
+parent, and is positioned at the top of the screen even when the user scrolls. */
 #navbar {
     background-color: #333;
     width: 100%;
@@ -15,6 +22,8 @@ body.index {
     top: 0;
 }
 
+/* Targets unordered lists within the navbar. 
+The list items are displayed as a flexible row with equal spacing between them. */
 #navbar ul {
     list-style-type: none;
     margin: 0;
@@ -23,6 +32,9 @@ body.index {
     justify-content: space-around;
 }
 
+/* Targets the links inside the list items in the navbar. 
+The links are displayed as blocks with a padding and have no underline. 
+Their text color is set to white. */
 #navbar li a {
     color: white;
     text-decoration: none;
@@ -30,10 +42,13 @@ body.index {
     display: block;
 }
 
+/* Changes the background color of the links to a darker shade when hovered over. */
 #navbar li a:hover {
     background-color: #111;
 }
 
+/* Styles the element with id 'map' with a width of 90% of its parent, 
+a height of 500px, a margin-top of 20px, and a light grey border. */
 #map {
     width: 90%;
     height: 500px;
@@ -41,6 +56,9 @@ body.index {
     border: 1px solid #ccc;
 }
 
+/* The modal (popup) is initially hidden, and is displayed as a flex container 
+in the center of the screen when activated. It covers the entire screen 
+with a semi-transparent black background. */
 .modal {
     display: none;
     position: fixed;
@@ -53,7 +71,8 @@ body.index {
     justify-content: center;
 }
 
-
+/* The content inside the modal is styled with a white background, padding, 
+border radius for rounded corners, and a maximum width of 500px. */
 .modal-content {
     background-color: white;
     padding: 20px;
@@ -62,11 +81,14 @@ body.index {
     width: 100%;
 }
 
+/* Styles the form with id 'markerForm' to display its children in a column. */
 #markerForm {
     display: flex;
     flex-direction: column;
 }
 
+/* Styles the text and submit inputs inside the marker form with a margin, padding, 
+border-radius, and a light grey border. */
 #markerForm input[type="text"],
 #markerForm input[type="submit"] {
     margin: 10px 0;
@@ -75,16 +97,19 @@ body.index {
     border: 1px solid #ccc;
 }
 
+/* Styles the submit button with a green background color, white text, and a pointer cursor. */
 #markerForm input[type="submit"] {
     background-color: #4caf50;
     color: white;
     cursor: pointer;
 }
 
+/* Changes the background color of the submit button to a darker green when hovered over. */
 #markerForm input[type="submit"]:hover {
     background-color: #45a049;
 }
 
+/* Styles the close button with a grey color, positioned to the right, with a large font size and bold font weight. */
 .close {
     color: #aaa;
     float: right;
@@ -92,6 +117,7 @@ body.index {
     font-weight: bold;
 }
 
+/* Changes the color of the close button to black and changes the cursor to a pointer when hovered over or in focus. */
 .close:hover,
 .close:focus {
     color: black;
