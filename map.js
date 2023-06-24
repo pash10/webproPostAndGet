@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.location.href = 'index.html';
   });
 });
-
+//sss
 // Function to initialize Google Map
 function initMap() {
   // Map options
